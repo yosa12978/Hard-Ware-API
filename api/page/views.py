@@ -15,23 +15,23 @@ class Index(APIView):
         if "id" in request.GET:
             processors = Processor.objects.filter(id = request.GET["id"])
         elif "title" in request.GET:
-            processors = Processor.objects.filter(title__icontains = request.GET["title"])
+            processors = Processor.objects.filter(title__icontains = request.GET["title"]).order_by("-id")
         elif "model" in request.GET:
-            pass
+            processors = Processor.objects.filter(model__icontains = request.GET["model"]).order_by("-id")
         elif "cm" in request.GET:
-            pass
+            processors = Processor.objects.filter(Chache_Memory = request.GET["cm"]).order_by("-id")
         elif "socket" in request.GET:
-            pass
+            processors = Processor.objects.filter(Socket = request.GET["socket"]).order_by("-id")
         elif "price" in request.GET:
-            pass
+            processors = Processor.objects.filter(Price = request.GET['price']).order_by("-id")
         elif "gc" in request.GET:
-            pass
+            processors = Processor.objects.filter(Graphics_Core = request.GET["gc"]).order_by("-id")
         elif "cores" in request.GET:
-            pass
+            processors = Processor.objects.filter(Cores = request.GET["cores"]).order_by("-id")
         elif "company" in request.GET:
-            pass
+            processors = Processor.objects.filter(Company = request.GET["company"]).order_by("-id")
         elif "frq" in request.GET:
-            pass
+            processors = Processor.objects.filter(Frequency = request.GET["frq"])
         else:
             processors = Processor.objects.order_by("-id")
         serializer = ProcessorSerializer(processors, many=True)
